@@ -6,6 +6,13 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
   },
   cacheComponents: true,
+  cacheLife:  {
+    creators:{
+      stale:60,
+      revalidate: 300,
+       expire: 3600,
+    }
+  },
   partialPrefetching: true,
   turbopack: {
     rules: {
