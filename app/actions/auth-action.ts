@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
-
+import { UserSchema } from "@/lib/Schema/userschema";
 export type AuthActionState = {
   success: boolean;
   message: string;
@@ -16,9 +16,17 @@ export async function signupAction(
   prevState: AuthActionState,
   formData: FormData
 ): Promise<AuthActionState> {
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+  const validationResult = UserSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  if (!validationResult.success) {
+    return { success: false, message: "يرجى تصحيح الأخطاء الموجودة في النموذج." };
+  }
+
+  const { name, email, password } = validationResult.data;
 
   if (!name || !email || !password) {
     return { success: false, message: "يرجى ملء جميع الحقول المطلوبة." };

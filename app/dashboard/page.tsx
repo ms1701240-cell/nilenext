@@ -1,5 +1,6 @@
 import { getposts } from '@/lib/posts';
 import { getuserstate } from '@/lib/dashboard';
+import { Suspense } from 'react';
 import Searchpost from '@/components/searchpost';
 export default async function Dashboard({searchParams}: {searchParams:Promise< {search?: string,page?: string} >}) {
   const search = (await searchParams).search || '';
@@ -30,10 +31,14 @@ export default async function Dashboard({searchParams}: {searchParams:Promise< {
           <ul className="space-y-3">
             {posts.length > 0 ? (
               posts.map((post: any) => (
-                <li key={post.id} className="p-3 bg-slate-50 rounded-lg text-slate-700">
-                  {post.title}
-                </li>
+                <Suspense key={post.id} fallback={<li className="p-3 bg-slate-50 rounded-lg text-slate-700">Loading...</li>}>
+                  <li className="p-3 bg-slate-50 rounded-lg text-slate-700">
+                    {post.title}
+                  </li>
+                </Suspense>
               ))
+                
+              
             ) : (
               <p className="text-sm text-slate-400">No posts found.</p>
             )}

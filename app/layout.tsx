@@ -1,3 +1,4 @@
+
 import './globals.css'
 import Footer from '../components/footer'
 import Navbar from '../components/navbar'
@@ -20,9 +21,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <NuqsAdapter>
           {/* 2. حط Navbar جوا Suspense عشان يحل مشكلة الـ Prerender */}
-          <Suspense fallback={<div className="h-16 bg-white border-b" />}>
-            <Navbar />
-          </Suspense>
+         
+            <Suspense fallback={<div>Loading...</div>}>
+  <Navbar />
+</Suspense>
+          
           
           {children}
           

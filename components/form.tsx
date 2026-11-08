@@ -16,7 +16,7 @@ const initialState: ActionState = {
     
 };
 
-export default function CreatePostForm() {
+export default function CreatePostForm(props: React.FormHTMLAttributes<HTMLFormElement>) {
   const [state, formAction] = useActionState(postaction, initialState);
 
   const [optimisticPosts, setOptimisticPosts] = useOptimistic<Post[], Post>(

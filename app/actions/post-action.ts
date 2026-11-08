@@ -1,6 +1,6 @@
 'use server';
 
-import { userSchema } from "@/lib/Schema/userschema";
+import { PostSchema } from "@/lib/Schema/postschema";
 import { db } from "@/lib/db"; // استيراد Prisma Client
 import { auth } from "@/auth";   // استيراد الجلسة لمعرفة المستخدم الحالي
 import { revalidatePath } from "next/cache";
@@ -25,7 +25,7 @@ export async function postaction(prevstate: ActionState, formData: FormData): Pr
   }
 
   // 2. التحقق من صحة المدخلات عبر Zod Schema
-  const result = userSchema.safeParse({
+  const result = PostSchema.safeParse({
     title: formData.get("title"),
     content: formData.get("content"),
   });
