@@ -10,13 +10,13 @@ import { Suspense } from 'react'; // 1. استورد Suspense
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata = {
-  title: 'Nile',
-  description: 'Nile is a web3 social media platform...',
+  title: 'Nile | مساحة للقراءة والكتابة',
+  description: 'اكتشف مقالات وأفكارًا ملهمة، وشارك معرفتك مع مجتمع Nile.',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="ar" className={cn("font-sans", geist.variable)}>
       <head />
       <body>
         <NuqsAdapter>

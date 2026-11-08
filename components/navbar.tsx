@@ -6,29 +6,30 @@ export default async function Navbar() {
   const session = await auth()
 
   return (
-    <header className="border-b border-slate-200 bg-white">
+    <header dir="rtl" className="border-b border-slate-200 bg-white">
       <nav
-        aria-label="Main navigation"
+        aria-label="التنقل الرئيسي"
         className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
       >
-        <Link href="/" className="text-xl font-bold tracking-tight text-slate-900">
-          Nile
+        <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-slate-900">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-emerald-900 text-sm text-amber-300">N</span>
+          <span>Nile</span>
         </Link>
         <ul className="flex flex-wrap items-center gap-2 sm:gap-6">
           <li>
             <Link href="/" className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950">
-              Home
+              الرئيسية
             </Link>
           </li>
           <li>
             <Link href="/about" className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950">
-              About
+              عن الموقع
             </Link>
           </li>
           <li className="relative">
             <details className="group">
               <summary className="flex cursor-pointer list-none items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-500 [&::-webkit-details-marker]:hidden">
-                Blog
+                المقالات
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 20 20"
@@ -40,14 +41,14 @@ export default async function Navbar() {
               </summary>
               <ul className="absolute right-0 z-20 mt-2 min-w-52 overflow-hidden rounded-xl border border-slate-200 bg-white p-2 text-right shadow-lg">
                 <li>
-                  <Link href="/blog" className="block rounded-lg px-4 py-2.5 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-slate-950">
-                    All Posts
+                  <Link href="/#latest-articles" className="block rounded-lg px-4 py-2.5 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-slate-950">
+                    أحدث المقالات
                   </Link>
                 </li>
                
                 <li className="border-t border-slate-100 mt-1 pt-1">
                   <Link href="/blog/new" className="block rounded-lg px-4 py-2.5 text-sm font-semibold text-blue-600 transition hover:bg-blue-50 hover:text-blue-700">
-                    + إنشاء مدونة جديدة
+                    + اكتب مقالًا جديدًا
                   </Link>
                 </li>
               </ul>
@@ -64,7 +65,7 @@ export default async function Navbar() {
               </li>
               <li>
                 <Link href="/signup" className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700">
-                  إنشاء حساب
+                  انضم إلينا
                 </Link>
               </li>
             </>
@@ -77,7 +78,7 @@ export default async function Navbar() {
 
           <li>
             <Link href="/dashboard" className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700">
-              Dashboard
+              لوحة التحكم
             </Link>
           </li>
 
@@ -85,7 +86,7 @@ export default async function Navbar() {
           {session?.user?.role === "ADMIN" && (
             <li>
               <Link href="/admin" className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500">
-                Admin Panel 🛡️
+                الإدارة
               </Link>
             </li>
           )}
