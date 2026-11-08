@@ -1,8 +1,9 @@
 
 import { getpostbyslug } from "@/lib/posts"
 
-export default async function page({ params }: { params: { slug: string } }) {
-  const post = await getpostbyslug(params.slug);
+export default async function page({ params }: { params: Promise< { slug: string }>}) {
+ const resolvedParams = await params;
+  const post = await getpostbyslug(resolvedParams.slug);
 
   return (
     <div>

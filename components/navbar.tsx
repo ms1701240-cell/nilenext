@@ -1,8 +1,10 @@
-
-
 import Link from 'next/link'
+import { auth } from '@/auth'
 
-const Navbar = () => {
+export default async function Navbar() {
+  
+  const session = await auth()
+
   return (
     <header className="border-b border-slate-200 bg-white">
       <nav
@@ -42,28 +44,53 @@ const Navbar = () => {
                     All Posts
                   </Link>
                 </li>
-                <li>
-                  <Link href="/blog/featured-posts" className="block rounded-lg px-4 py-2.5 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-slate-950">
-                    Featured Posts
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog/student-stories" className="block rounded-lg px-4 py-2.5 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-slate-950">
-                    حكايات طلابية
+               
+                <li className="border-t border-slate-100 mt-1 pt-1">
+                  <Link href="/blog/new" className="block rounded-lg px-4 py-2.5 text-sm font-semibold text-blue-600 transition hover:bg-blue-50 hover:text-blue-700">
+                    + إنشاء مدونة جديدة
                   </Link>
                 </li>
               </ul>
             </details>
           </li>
+
+      
+          {!session ? (
+            <>
+              <li>
+                <Link href="/login" className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950">
+                  تسجيل الدخول
+                </Link>
+              </li>
+              <li>
+                <Link href="/signup" className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700">
+                  إنشاء حساب
+                </Link>
+              </li>
+            </>
+          ) : (
+            
+            <li className="text-sm text-slate-600 font-medium">
+              أهلاً، {session.user?.name || "مستخدم"}
+            </li>
+          )}
+
           <li>
             <Link href="/dashboard" className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700">
               Dashboard
             </Link>
           </li>
+
+          
+          {session?.user?.role === "ADMIN" && (
+            <li>
+              <Link href="/admin" className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500">
+                Admin Panel 🛡️
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
   )
 }
-
-export default Navbar
