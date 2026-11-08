@@ -1,0 +1,37 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String?
+  email        String   @unique
+  passwordHash String?
+  role         Role     @default(VIEWER)
+  posts        Post[]
+  
+  createdAt    DateTime @default(now()) // وقت إنشاء الحساب
+  updatedAt    DateTime @updatedAt      // وقت آخر تعديل
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) // وقت نشر البوست
+  updatedAt DateTime @updatedAt      // وقت تعديل البوست
+}
