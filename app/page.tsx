@@ -52,6 +52,7 @@ export default async function HomePage() {
           width={500}
           height={480}
           priority
+          
         />
       </section>
 
