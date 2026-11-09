@@ -1,0 +1,5 @@
+echo '[phases.setup]' > .nixpacks.toml
+echo 'nixPkgs = ["nodejs_20", "npm"]' >> .nixpacks.toml
+git add .nixpacks.toml
+git commit -m "chore: force nixpacks nodejs_20"
+git push origin lab-08-production
