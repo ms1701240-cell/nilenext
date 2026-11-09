@@ -9,6 +9,9 @@
     "lint": "eslint",
     "postinstall": "prisma skills sync || exit 0"
   },
+  "engines": {
+  "node": ">=20.9.0"
+},
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
     "bcrypt": "^6.0.0",
