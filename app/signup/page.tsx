@@ -30,6 +30,9 @@ export default function SignUpPage() {
               placeholder="اكتب اسمك..."
               className="mt-1 w-full rounded-lg border border-slate-300 p-2.5 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />
+            {state?.error?.name && (
+              <p className="mt-1 text-sm text-red-600">{state.error.name[0]}</p>
+            )}
           </div>
 
           <div>
@@ -41,6 +44,9 @@ export default function SignUpPage() {
               placeholder="name@example.com"
               className="mt-1 w-full rounded-lg border border-slate-300 p-2.5 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />
+            {state?.error?.email && (
+              <p className="mt-1 text-sm text-red-600">{state.error.email[0]}</p>
+            )}
           </div>
 
           <div>
@@ -52,6 +58,9 @@ export default function SignUpPage() {
               placeholder="••••••••"
               className="mt-1 w-full rounded-lg border border-slate-300 p-2.5 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />
+            {state?.error?.password && (
+              <p className="mt-1 text-sm text-red-600">{state.error.password[0]}</p>
+            )}
           </div>
 
           {state?.message && (

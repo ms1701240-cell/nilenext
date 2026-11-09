@@ -9,6 +9,11 @@ import { UserSchema } from "@/lib/Schema/userschema";
 export type AuthActionState = {
   success: boolean;
   message: string;
+  error?: {
+    name?: string[];
+    email?: string[];
+    password?: string[];
+  }
 };
 
 // 1. دالة إنشاء حساب جديد (Sign Up Action)
@@ -23,7 +28,7 @@ export async function signupAction(
   });
 
   if (!validationResult.success) {
-    return { success: false, message: "يرجى تصحيح الأخطاء الموجودة في النموذج." };
+    return { success: false, message: "يرجى تصحيح الأخطاء الموجودة في النموذج.", error: validationResult.error.flatten().fieldErrors };
   }
 
   const { name, email, password } = validationResult.data;
